@@ -1,0 +1,198 @@
+site:
+  title: Site-2中央路由系统
+  mark: TECLAB
+  loading:
+    minDuration: 1000
+    status: 正在检测网络环境
+
+adapters:
+  - id: schoolNetwork
+    name: 校园网检测
+    mode: https-probe
+    variable: isSchoolNetwork
+    config:
+      url: https://bitshare.lan.site-2.teclab.org.cn/
+      timeout: 2500
+      successValue: true
+      failureValue: false
+      successText: 校内网络
+      failureText: 校外网络
+
+  - id: always
+    name: 默认可用
+    mode: constant
+    variable: always
+    config:
+      value: true
+      text: 可用
+
+services:
+  - id: site2-bitshare
+    name: Bitshare
+    links:
+      - label: 校内入口
+        url: https://bitshare.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://bitshare.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-bitshare-search
+    name: Bitshare Search
+    links:
+      - label: 校内入口
+        url: https://bitshare-search.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://bitshare-search.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-bitshare-upload
+    name: Bitshare Upload
+    links:
+      - label: 校内入口
+        url: https://bitshare-upload.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://bitshare-upload.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-bitshare-app
+    name: Bitshare App
+    links:
+      - label: 校内入口
+        url: https://bitshare-app.lan.site-2.teclab.org.cn
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://app.bitshare.com.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-speedtest
+    name: 测速
+    links:
+      - label: 校内入口
+        url: https://speedtest.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://speedtest.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-pve
+    name: PVE
+    links:
+      - label: 校内入口
+        url: https://pve.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://pve.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-truenas
+    name: TrueNAS
+    links:
+      - label: 校内入口
+        url: https://truenas.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://truenas.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-openwrt
+    name: OpenWrt
+    links:
+      - label: 校内入口
+        url: https://openwrt.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://openwrt.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-portainer
+    name: Portainer
+    links:
+      - label: 校内入口
+        url: https://portainer.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://portainer.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-alist
+    name: Alist
+    links:
+      - label: 校内入口
+        url: https://alist.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://alist.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-jellyfin
+    name: Jellyfin
+    links:
+      - label: 校内入口
+        url: https://jellyfin.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://jellyfin.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-gitlab
+    name: GitLab
+    links:
+      - label: 校内入口
+        url: https://gitlab.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://gitlab.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-webdav
+    name: WebDAV
+    links:
+      - label: 校内入口
+        url: https://webdav.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://webdav.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-duplicati
+    name: Duplicati
+    links:
+      - label: 校内入口
+        url: https://duplicati.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://duplicati.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-deeplx
+    name: DeepLX
+    links:
+      - label: 校内入口
+        url: https://deeplx.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://deeplx.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-thingsboard
+    name: ThingsBoard
+    links:
+      - label: 校内入口
+        url: https://thingsboard.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://thingsboard.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"
+
+  - id: site2-biter
+    name: Biter
+    links:
+      - label: 校内入口
+        url: https://biter.lan.site-2.teclab.org.cn/
+        when: isSchoolNetwork
+      - label: 公网入口
+        url: https://biter.site-2.teclab.org.cn:10043/
+        when: "!isSchoolNetwork"

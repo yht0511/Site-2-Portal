@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Site-2中央路由系统</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="is-booting">
+    <div id="bootScreen" class="boot-screen" aria-live="polite" aria-label="系统预检">
+      <div class="boot-panel">
+        <div class="boot-topline">
+          <span>TECLAB</span>
+          <span>正在检测</span>
+        </div>
+        <div class="boot-identity">
+          <div>
+            <h1 id="bootTitle">Site-2中央路由系统</h1>
+          </div>
+        </div>
+        <div class="boot-scanner" aria-hidden="true">
+          <div class="boot-sweep"></div>
+        </div>
+        <div id="bootStatus" class="boot-status">正在装载路由配置</div>
+      </div>
+    </div>
+
+    <main class="app-shell">
+      <header class="app-header">
+        <div class="header-inner">
+          <div class="brand">
+            <div id="brandMark" class="brand-mark" aria-hidden="true">TECLAB</div>
+            <div>
+              <h1 id="brandTitle">Site-2中央路由系统</h1>
+            </div>
+          </div>
+          <a class="logout-link" href="https://auth.site-2.teclab.org.cn:10043/logout">管理登录 / 退出</a>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="content-inner">
+          <div class="toolbar">
+            <label class="search-field">
+              <span>搜索服务</span>
+              <input id="searchInput" type="search" placeholder="输入名称、ID 或链接" autocomplete="off" />
+            </label>
+            <div class="toolbar-actions">
+              <button id="refreshButton" type="button">刷新检测</button>
+              <div id="routeNotice" class="route-notice" role="status"></div>
+            </div>
+          </div>
+
+          <section class="status-panel" aria-labelledby="adapterTitle">
+            <div class="section-heading">
+              <h2 id="adapterTitle">环境检测</h2>
+              <span id="serviceCount">正在加载</span>
+            </div>
+            <div id="adapterList" class="adapter-list" aria-live="polite"></div>
+          </section>
+
+          <section class="service-section" aria-label="服务入口">
+            <div id="serviceGrid" class="service-list" aria-live="polite"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

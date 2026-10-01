@@ -18,6 +18,37 @@ http://localhost:4173/
 
 不要直接用 `file://` 打开 `index.html`，浏览器通常会阻止页面读取 `services.yaml`。
 
+## 部署到 Cloudflare Workers
+
+项目使用 Workers Static Assets 发布静态网站。`wrangler.jsonc` 的名称对应现有 Worker `site-2-portal`，构建脚本只将四个网站文件复制到 `dist/`。
+
+在 Worker 的「设置 → 构建 → 构建配置」中填写：
+
+| 设置项 | 值 |
+| --- | --- |
+| 构建命令 | `node scripts/build.mjs` |
+| 部署命令 | `npx wrangler@4 deploy` |
+| 版本命令 | `npx wrangler@4 versions upload` |
+| 根目录 | `/`（仓库根目录） |
+| 生产分支 | `main` |
+
+构建变量和运行时变量无需配置，API 令牌保留 Cloudflare 自动创建的令牌。
+先保存上述设置，再将部署配置和脚本提交并推送到 GitHub，触发生产部署。
+版本命令用于上传非生产版本，不会替换生产部署。
+
+`exit 0` 只会成功退出，不能用作 Workers 的部署命令，否则网站文件不会上传，已有的 Hello World 示例会继续运行。`app.js` 在浏览器中运行，不需要配置为 Worker 的 `main` 入口。
+
+本地检查部署配置（不会发布）：
+
+```bash
+node scripts/build.mjs
+npx wrangler@4 deploy --dry-run
+```
+
+部署成功后，在 Worker 的「域」中确认自定义域名 `portal.site-2.teclab.org.cn` 关联到此 Worker，并访问首页及 `/services.yaml` 检查资源是否发布成功。
+
+如果另建 Cloudflare Pages 项目，可使用同一个构建命令 `node scripts/build.mjs`，构建输出目录填 `dist`，框架选择 `None`；Pages 不需要填写 Workers 部署命令。
+
 ## 自动跳转参数
 
 页面打开时带以下任一参数会自动匹配并跳转：
